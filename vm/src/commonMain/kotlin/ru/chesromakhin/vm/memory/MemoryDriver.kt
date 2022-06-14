@@ -4,6 +4,10 @@ import ru.chesromakhin.vm.driver.Driver
 
 class MemoryDriver(memorySize: Int, stackSize: Int) : Driver {
 
+  companion object {
+    const val NAME: String = "memory"
+  }
+
   private var memory: Array<Short> = emptyArray()
   private var stack: MutableList<Short> = mutableListOf()
   private var stackSize = 0
@@ -15,7 +19,7 @@ class MemoryDriver(memorySize: Int, stackSize: Int) : Driver {
 
   override val name: String
     get() {
-      return "memory"
+      return NAME
     }
 
   fun write(address: Short, value: Short) {

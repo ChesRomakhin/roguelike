@@ -1,7 +1,7 @@
 package ru.chesromakhin.vm
 
 import ru.chesromakhin.vm.command.Command
-import ru.chesromakhin.vm.command.NoopCommand
+import ru.chesromakhin.vm.command.system.NoopCommand
 import ru.chesromakhin.vm.driver.Driver
 
 class VirtualMachine {
@@ -11,13 +11,21 @@ class VirtualMachine {
   private var program: List<Long> = emptyList()
   private var commandMap: MutableMap<Int, Command> = mutableMapOf()
 
+  private var stopped: Boolean = false
+
   init {
     commandMap = commandMap.withDefault { NoopCommand() }
   }
 
   fun runForTicks(ticks: Int) {
+    this.stopped = false
+
     for (i in 0 until ticks) {
       tick()
+
+      if (this.stopped) {
+        break
+      }
     }
   }
 
@@ -35,9 +43,9 @@ class VirtualMachine {
     val firstParam = commandAndParams.and(0x0000FF00).shr(8).toShort()
     val secondParam = commandAndParams.and(0x000000FF).toShort()
     val command = commandMap[commandCode]
-    
-    currentCommand = command?.execute(this, firstParam, secondParam) ?: (currentCommand + 1)
-    currentCommand %= program.size
+
+    val counterChange = command?.execute(this, firstParam, secondParam) ?: 1
+    currentCommand = (currentCommand + counterChange) % program.size
   }
 
   fun <D: Driver> getDriver(name: String): D? {
@@ -56,6 +64,10 @@ class VirtualMachine {
   fun loadProgram(newProgram: List<Long>) {
     program = newProgram
     currentCommand = 0
+  }
+
+  fun stop() {
+    this.stopped = true
   }
 
 }

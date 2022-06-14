@@ -1,6 +1,7 @@
-package ru.chesromakhin.vm.command
+package ru.chesromakhin.vm.command.system
 
 import ru.chesromakhin.vm.VirtualMachine
+import ru.chesromakhin.vm.command.Command
 
 class NoopCommand: Command {
   override val group: String
