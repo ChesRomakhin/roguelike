@@ -20,6 +20,11 @@ kotlin {
     }
     withJava()
   }
+  js {
+    browser {
+      binaries.executable()
+    }
+  }
   sourceSets {
     val commonMain by getting
     val commonTest by getting {
@@ -33,5 +38,6 @@ kotlin {
         implementation(kotlin("test-junit"))
       }
     }
+    val jsMain by getting
   }
 }

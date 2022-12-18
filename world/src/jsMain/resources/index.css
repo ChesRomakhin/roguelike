@@ -1,0 +1,10 @@
+@import url("./css/cell.css");
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("./fonts/SpaceMono-Regular.ttf");
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+}
