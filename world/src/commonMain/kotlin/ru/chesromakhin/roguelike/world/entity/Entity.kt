@@ -4,12 +4,12 @@ import ru.chesromakhin.roguelike.world.Location
 import ru.chesromakhin.roguelike.world.command.Command
 import ru.chesromakhin.roguelike.world.World
 
-abstract class Entity {
+abstract class Entity(val id: String) {
 
-  open val char: Char = '?'
+  open var char: Char = '?'
   var location: Location = Location(0, 0)
 
-  private val exaust: Int = 0
+  var exaust: Int = 0
 
   abstract fun process(world: World): Command
 

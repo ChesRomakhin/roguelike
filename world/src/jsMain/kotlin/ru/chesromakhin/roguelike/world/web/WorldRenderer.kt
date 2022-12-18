@@ -13,6 +13,7 @@ class WorldRenderer(private val world: World, private val element: Element) {
   private var mainNode: Element? = null
 
   private var elementsByLocation: Map<Location, Element> = mapOf()
+  private var rowElements: List<Element> = ArrayList()
 
   fun render() {
     if (mainNode == null) {
@@ -20,31 +21,40 @@ class WorldRenderer(private val world: World, private val element: Element) {
       element.appendChild(mainNode!!)
     }
 
-    mainNode!!.children.asList().forEach { mainNode!!.removeChild(it) }
-
     for ((y, row) in world.cells.withIndex()) {
-      val rowNode = document.createElement("div")
-      rowNode.setAttribute("row-index", y.toString())
+      val rowNode = if (rowElements.size > y) {
+        rowElements[y]
+      } else {
+        val e = document.createElement("div")
+        e.setAttribute("row-index", y.toString())
+        mainNode!!.appendChild(e)
+        rowElements += e
+
+        e
+      }
+
       for ((x, cell) in row.withIndex()) {
-        val cellNode = document.createElement("span")
-        cellNode.setAttribute("cell-index", x.toString())
-        cellNode.addClass("cell")
+        val location = Location(x, y)
+        val cellNode = if (elementsByLocation.containsKey(location)) {
+          elementsByLocation[location]
+        } else {
+          val e = document.createElement("span")
+          e.setAttribute("cell-index", x.toString())
+          e.addClass("cell")
+          elementsByLocation += location to e
+          rowNode.appendChild(e)
+
+          e
+        }!!
 
         cellNode.textContent = when (cell.type) {
           CellType.FLOOR -> "."
           CellType.WALL -> "#"
           else -> "?"
         }
-
-        rowNode.appendChild(cellNode)
-
-        elementsByLocation += Location(x, y) to cellNode
       }
-
-      mainNode!!.appendChild(rowNode)
     }
 
-    console.log(elementsByLocation)
     world.entities.forEach {
       val element = elementsByLocation[it.location]
       element!!.textContent = it.char.toString()

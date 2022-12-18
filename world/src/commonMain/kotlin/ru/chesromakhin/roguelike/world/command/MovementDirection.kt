@@ -2,7 +2,7 @@ package ru.chesromakhin.roguelike.world.command
 
 import ru.chesromakhin.roguelike.world.Location
 
-enum class MovementDirection(delta: Location) {
+enum class MovementDirection(val delta: Location) {
 
   UP(Location(0, 1)),
   RIGHT(Location(1, 0)),
