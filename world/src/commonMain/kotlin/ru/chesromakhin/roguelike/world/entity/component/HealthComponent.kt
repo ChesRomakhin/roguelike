@@ -1,12 +1,11 @@
-package ru.chesromakhin.roguelike.world.entity
+package ru.chesromakhin.roguelike.world.entity.component
 
 class HealthComponent(
-  maxHealth: Int
+  var maxHealth: Int
 ): Component {
 
   private val name: String = "health"
 
-  var maxHealth: Int = maxHealth
   private var currentHealth: Int = maxHealth
 
   override fun getName(): String {
@@ -30,6 +29,9 @@ class HealthComponent(
   fun heal(amount: Int) {
     if (this.isAlive()) {
       this.currentHealth += amount
+      if (this.currentHealth > maxHealth) {
+        this.currentHealth = maxHealth
+      }
     }
   }
 

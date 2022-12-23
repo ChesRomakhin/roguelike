@@ -3,6 +3,7 @@ package ru.chesromakhin.roguelike.world.entity
 import ru.chesromakhin.roguelike.world.Location
 import ru.chesromakhin.roguelike.world.command.Command
 import ru.chesromakhin.roguelike.world.World
+import ru.chesromakhin.roguelike.world.entity.component.Component
 import kotlin.reflect.KClass
 
 abstract class Entity(val id: String) {
@@ -24,6 +25,11 @@ abstract class Entity(val id: String) {
     return this.components.any {
       componentClass.isInstance(it)
     }
+  }
+
+  @Suppress("UNCHECKED_CAST")
+  fun <T: Component> getComponent(componentClass: KClass<T>): T? {
+    return this.components.find { componentClass.isInstance(it) } as T?
   }
 
 }

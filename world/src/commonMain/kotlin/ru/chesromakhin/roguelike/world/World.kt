@@ -11,4 +11,8 @@ class World {
     entities += entity
   }
 
+  fun getEntity(location: Location): Entity? {
+    return entities.find { it.location == location }
+  }
+
 }

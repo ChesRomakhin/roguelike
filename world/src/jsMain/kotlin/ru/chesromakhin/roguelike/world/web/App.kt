@@ -32,4 +32,6 @@ fun main() {
     entitiesRenderer.render()
     gameInputsRenderer.render()
   }
+
+  game.onCommand { command, entity -> console.log("entity[${entity.char}]{${entity.id}} executed command ${command::class.simpleName}") }
 }

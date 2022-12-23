@@ -16,11 +16,11 @@ fun generateWorld(): World {
   world.cells.first().forEach { it.type = CellType.WALL }
   world.cells.last().forEach { it.type = CellType.WALL }
 
-  val wanderingBot = WanderingBot(Date.now().toString())
+  val wanderingBot = WanderingBot(Date.now().toString(), 10)
   wanderingBot.location = Location(1,2)
   world.addEntity(wanderingBot)
 
-  val wanderingBot2 = WanderingBot(Date.now().toString())
+  val wanderingBot2 = WanderingBot(Date.now().toString(), 10)
   wanderingBot2.location = Location(6,5)
   wanderingBot2.speed = 4
   wanderingBot2.char = 'F'

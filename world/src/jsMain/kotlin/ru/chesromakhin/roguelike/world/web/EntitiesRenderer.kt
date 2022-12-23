@@ -1,8 +1,8 @@
 package ru.chesromakhin.roguelike.world.web
 
 import org.w3c.dom.Element
-import org.w3c.dom.asList
 import ru.chesromakhin.roguelike.world.World
+import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
 
 class EntitiesRenderer(private val world: World, private val element: Element) {
 
@@ -19,12 +19,19 @@ class EntitiesRenderer(private val world: World, private val element: Element) {
       val exhaustion = entity.exaust
 
       val exhaustionString: String = if (exhaustion > 0) {
-        " " + "*".repeat(exhaustion)
+        "*".repeat(exhaustion)
       } else {
-        " 0";
+        "0"
       }
 
-      entityElement.textContent = entity.char + exhaustionString
+      val healthString = if (entity.hasComponent(HealthComponent::class)) {
+        val healthComponent = entity.getComponent(HealthComponent::class)!!
+        "${healthComponent.getCurrentHealth()}/${healthComponent.maxHealth}"
+      } else {
+        "-/-"
+      }
+
+      entityElement.textContent = arrayOf(entity.char.toString(), healthString, exhaustionString).joinToString("  ")
     }
   }
 
