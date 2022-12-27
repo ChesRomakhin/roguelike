@@ -1,6 +1,8 @@
 package ru.chesromakhin.roguelike.world
 
 import ru.chesromakhin.roguelike.world.entity.Entity
+import ru.chesromakhin.roguelike.world.entity.component.Component
+import kotlin.reflect.KClass
 
 class World {
 
@@ -13,6 +15,10 @@ class World {
 
   fun getEntity(location: Location): Entity? {
     return entities.find { it.location == location }
+  }
+
+  fun getEntity(location: Location, componentClass: KClass<out Component>): Entity? {
+    return entities.find { it.location == location && it.hasComponent(componentClass) }
   }
 
 }

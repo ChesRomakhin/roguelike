@@ -14,12 +14,12 @@ class Game(val world: World) {
   fun cycle() {
     val entities = world.entities
     for (entity in entities) {
-      if (entity.exaust > 0) {
-        entity.exaust--
+      if (entity.exhaust > 0) {
+        entity.exhaust--
         continue
       }
 
-      if (entity.exaust <= 0) {
+      if (entity.exhaust <= 0) {
         val command = entity.process(world)
         command.execute(entity, world)
         commandListeners.forEach { it.invoke(command, entity) }

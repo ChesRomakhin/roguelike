@@ -4,13 +4,9 @@ class HealthComponent(
   var maxHealth: Int
 ): Component {
 
-  private val name: String = "health"
-
   private var currentHealth: Int = maxHealth
 
-  override fun getName(): String {
-    return this.name
-  }
+  override val name: String = "health"
 
   fun isAlive(): Boolean {
     return currentHealth > 0

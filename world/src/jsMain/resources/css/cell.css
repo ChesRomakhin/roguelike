@@ -1,5 +1,6 @@
 .cell {
   display: inline-block;
   width: 1rem;
+  line-height: 1rem;
   text-align: center;
 }

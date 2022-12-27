@@ -3,10 +3,10 @@ package ru.chesromakhin.roguelike.world.web
 import kotlinx.browser.document
 import kotlinx.dom.addClass
 import org.w3c.dom.Element
-import org.w3c.dom.asList
 import ru.chesromakhin.roguelike.world.CellType
 import ru.chesromakhin.roguelike.world.Location
 import ru.chesromakhin.roguelike.world.World
+import ru.chesromakhin.roguelike.world.entity.component.Passable
 
 class WorldRenderer(private val world: World, private val element: Element) {
 
@@ -27,6 +27,7 @@ class WorldRenderer(private val world: World, private val element: Element) {
       } else {
         val e = document.createElement("div")
         e.setAttribute("row-index", y.toString())
+        e.classList.add("row")
         mainNode!!.appendChild(e)
         rowElements += e
 
@@ -55,7 +56,8 @@ class WorldRenderer(private val world: World, private val element: Element) {
       }
     }
 
-    world.entities.forEach {
+    val entitiesByPassable = world.entities.groupBy { it.hasComponent(Passable::class) }.withDefault { listOf() }
+    (entitiesByPassable[true]!! + entitiesByPassable[false]!!).forEach {
       val element = elementsByLocation[it.location]
       element!!.textContent = it.char.toString()
     }

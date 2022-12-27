@@ -16,7 +16,7 @@ class EntitiesRenderer(private val world: World, private val element: Element) {
       val entityElement = document.createElement("div")
       element.appendChild(entityElement)
 
-      val exhaustion = entity.exaust
+      val exhaustion = entity.exhaust
 
       val exhaustionString: String = if (exhaustion > 0) {
         "*".repeat(exhaustion)

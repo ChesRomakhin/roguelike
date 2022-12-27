@@ -6,12 +6,14 @@ import ru.chesromakhin.roguelike.world.command.Command
 import ru.chesromakhin.roguelike.world.command.Direction
 import ru.chesromakhin.roguelike.world.command.Movement
 import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
+import ru.chesromakhin.roguelike.world.entity.component.Inventory
 import kotlin.random.Random
 
 class WanderingBot(id: String, health: Int) : Entity(id) {
 
   init {
     this.addComponent(HealthComponent(health))
+    this.addComponent(Inventory())
   }
 
   override var char: Char = 'W'
@@ -20,10 +22,10 @@ class WanderingBot(id: String, health: Int) : Entity(id) {
   private var random: Random = Random(id.hashCode())
 
   override fun process(world: World): Command {
-    val attackDirection = Direction.values().find { world.getEntity(location + it.delta) != null }
+    val attackDirection = Direction.values().find { world.getEntity(location + it.delta, HealthComponent::class) != null }
 
     if (attackDirection != null && random.nextBoolean()) {
-      return Attack(attackDirection, 1, this.getMoveExhaustion())
+      return Attack(attackDirection, this.getMoveExhaustion())
     }
 
     return Movement(this.getRandomDirection(), this.getMoveExhaustion())

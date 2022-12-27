@@ -11,9 +11,9 @@ abstract class Entity(val id: String) {
   open var char: Char = '?'
   var location: Location = Location(0, 0)
 
-  var exaust: Int = 0
+  open var exhaust: Int = 0
 
-  private var components: List<Component> = ArrayList()
+  protected var components: List<Component> = ArrayList()
 
   abstract fun process(world: World): Command
 
