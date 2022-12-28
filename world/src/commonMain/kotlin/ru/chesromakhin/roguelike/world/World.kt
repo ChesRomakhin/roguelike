@@ -8,6 +8,7 @@ class World {
 
   var cells: Array<Array<Cell>> = Array(10) { i -> Array(10) { j -> Cell(i, j) } }
   var entities: List<Entity> = ArrayList()
+  var destroyedEntities: List<Entity> = ArrayList()
 
   fun addEntity(entity: Entity) {
     entities += entity
@@ -19,6 +20,11 @@ class World {
 
   fun getEntity(location: Location, componentClass: KClass<out Component>): Entity? {
     return entities.find { it.location == location && it.hasComponent(componentClass) }
+  }
+
+  fun destroyEntity(entity: Entity) {
+    entities -= entity
+    destroyedEntities += entities
   }
 
 }
