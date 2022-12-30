@@ -5,7 +5,6 @@ import ru.chesromakhin.roguelike.world.command.*
 import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
 import ru.chesromakhin.roguelike.world.entity.component.Inventory
 import ru.chesromakhin.roguelike.world.item.ItemComponent
-import ru.chesromakhin.roguelike.world.item.ItemEntity
 import kotlin.random.Random
 
 class WanderingBot(id: String, health: Int) : Entity(id) {
