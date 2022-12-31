@@ -1,9 +1,9 @@
 package ru.chesromakhin.roguelike.world
 
-import ru.chesromakhin.roguelike.world.command.Command
+import ru.chesromakhin.roguelike.world.action.Action
 import ru.chesromakhin.roguelike.world.entity.Entity
 
-typealias CommandListener = (command: Command, entity: Entity) -> Unit
+typealias CommandListener = (action: Action, entity: Entity) -> Unit
 typealias CycleListener = () -> Unit
 
 class Game(val world: World) {

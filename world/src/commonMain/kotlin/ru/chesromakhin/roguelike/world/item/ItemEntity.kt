@@ -1,8 +1,8 @@
 package ru.chesromakhin.roguelike.world.item
 
 import ru.chesromakhin.roguelike.world.World
-import ru.chesromakhin.roguelike.world.command.Command
-import ru.chesromakhin.roguelike.world.command.Idle
+import ru.chesromakhin.roguelike.world.action.Action
+import ru.chesromakhin.roguelike.world.action.Idle
 import ru.chesromakhin.roguelike.world.entity.Entity
 import ru.chesromakhin.roguelike.world.entity.component.Passable
 
@@ -22,7 +22,7 @@ class ItemEntity(
       field = 2
     }
 
-  override fun process(world: World): Command {
+  override fun process(world: World): Action {
     return Idle(100)
   }
 

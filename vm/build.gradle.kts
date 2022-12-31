@@ -3,7 +3,6 @@ plugins {
 }
 
 repositories {
-  jcenter()
   mavenCentral()
   maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
   maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
@@ -19,6 +18,11 @@ kotlin {
       useJUnit()
     }
     withJava()
+  }
+  js {
+    browser {
+      binaries.executable()
+    }
   }
   sourceSets {
     val commonMain by getting

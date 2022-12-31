@@ -1,4 +1,4 @@
-package ru.chesromakhin.roguelike.world.command
+package ru.chesromakhin.roguelike.world.action
 
 import ru.chesromakhin.roguelike.world.Location
 

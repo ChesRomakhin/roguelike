@@ -1,4 +1,4 @@
-package ru.chesromakhin.roguelike.world.command
+package ru.chesromakhin.roguelike.world.action
 
 import ru.chesromakhin.roguelike.world.World
 import ru.chesromakhin.roguelike.world.entity.Entity
@@ -8,7 +8,7 @@ import ru.chesromakhin.roguelike.world.item.ItemComponent
 import ru.chesromakhin.roguelike.world.item.ItemEntity
 import ru.chesromakhin.roguelike.world.item.Weapon
 
-class PickItem: Command(1) {
+class PickItem: Action(1) {
 
   override fun execute(entity: Entity, world: World) {
     entity.exhaust += this.exhaustion

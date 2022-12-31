@@ -1,7 +1,7 @@
 package ru.chesromakhin.roguelike.world.entity
 
 import ru.chesromakhin.roguelike.world.Location
-import ru.chesromakhin.roguelike.world.command.Command
+import ru.chesromakhin.roguelike.world.action.Action
 import ru.chesromakhin.roguelike.world.World
 import ru.chesromakhin.roguelike.world.entity.component.Component
 import kotlin.reflect.KClass
@@ -15,7 +15,7 @@ abstract class Entity(val id: String) {
 
   protected var components: List<Component> = ArrayList()
 
-  abstract fun process(world: World): Command
+  abstract fun process(world: World): Action
 
   fun addComponent(component: Component) {
     this.components += component

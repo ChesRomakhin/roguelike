@@ -10,6 +10,7 @@ repositories {
   maven { url = uri("https://dl.bintray.com/kotlin/ktor") }
 }
 
+
 kotlin {
   jvm {
     compilations.all {
@@ -26,7 +27,11 @@ kotlin {
     }
   }
   sourceSets {
-    val commonMain by getting
+    val commonMain by getting {
+      dependencies {
+        implementation(project(":vm"))
+      }
+    }
     val commonTest by getting {
       dependencies {
         implementation(kotlin("test-common"))

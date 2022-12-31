@@ -1,4 +1,4 @@
-package ru.chesromakhin.roguelike.world.command
+package ru.chesromakhin.roguelike.world.action
 
 import ru.chesromakhin.roguelike.world.CellType
 import ru.chesromakhin.roguelike.world.entity.Entity
@@ -8,7 +8,7 @@ import ru.chesromakhin.roguelike.world.entity.component.Passable
 class Movement(
   private val direction: Direction,
   exhaustion: Int
-): Command(exhaustion) {
+): Action(exhaustion) {
 
   override fun execute(entity: Entity, world: World) {
     val location = entity.location

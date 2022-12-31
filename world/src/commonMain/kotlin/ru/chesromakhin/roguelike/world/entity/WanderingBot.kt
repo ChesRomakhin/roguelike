@@ -1,7 +1,7 @@
 package ru.chesromakhin.roguelike.world.entity
 
 import ru.chesromakhin.roguelike.world.World
-import ru.chesromakhin.roguelike.world.command.*
+import ru.chesromakhin.roguelike.world.action.*
 import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
 import ru.chesromakhin.roguelike.world.entity.component.Inventory
 import ru.chesromakhin.roguelike.world.item.ItemComponent
@@ -19,7 +19,7 @@ class WanderingBot(id: String, health: Int) : Entity(id) {
 
   private var random: Random = Random(id.hashCode())
 
-  override fun process(world: World): Command {
+  override fun process(world: World): Action {
     val item = world.getEntity(this.location, ItemComponent::class)
     if (item != null && random.nextBoolean()) {
       return PickItem()

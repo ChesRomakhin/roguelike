@@ -1,4 +1,4 @@
-package ru.chesromakhin.roguelike.world.command
+package ru.chesromakhin.roguelike.world.action
 
 import ru.chesromakhin.roguelike.world.World
 import ru.chesromakhin.roguelike.world.entity.Entity
@@ -9,7 +9,7 @@ import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
 class Attack(
   private val direction: Direction,
   exhaustion: Int,
-) : Command(exhaustion) {
+) : Action(exhaustion) {
 
   override fun execute(entity: Entity, world: World) {
     entity.exhaust = exhaustion
