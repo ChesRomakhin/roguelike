@@ -8,27 +8,26 @@ import ru.chesromakhin.roguelike.world.entity.component.HealthComponent
 
 class Attack(
   private val direction: Direction,
-  exhaustion: Int,
-) : Action(exhaustion) {
+) : Action {
 
   override fun execute(entity: Entity, world: World) {
-    entity.exhaust = exhaustion
+    entity.exhaust = entity.actionExhaustion
 
     val attack = entity.getComponent(AttackComponent::class)?.attack ?: return
 
     val location = entity.location + direction.delta
-    val victim = world.getEntity(location, HealthComponent::class) ?: return
-    val healthComponent = victim.getComponent(HealthComponent::class) ?: return
-    val defence = victim.getComponent(DefenceComponent::class)?.defence ?: 0
+    val target = world.getEntity(location, HealthComponent::class) ?: return
+    val targetHealth = target.getComponent(HealthComponent::class) ?: return
+    val targetDefence = target.getComponent(DefenceComponent::class)?.defence ?: 0
 
-    val damage = if (defence >= attack) {
+    val damage = if (targetDefence >= attack) {
       0
     } else {
-      attack - defence
+      attack - targetDefence
     }
 
     if (damage > 0) {
-      healthComponent.damage(damage)
+      targetHealth.damage(damage)
     }
   }
 

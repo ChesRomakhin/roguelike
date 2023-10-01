@@ -14,8 +14,9 @@ class ItemEntity(
     this.components = listOf(ItemComponent(item), Passable())
   }
 
-  override var char: Char = item::class.simpleName?.lowercase()?.first() ?: 'i'
+  override var char: String = item::class.simpleName?.lowercase()?.substring(0, 1) ?: "i"
 
+  override var actionExhaustion: Int = 100
   override var exhaust = 2
     set(value) {
       //items will not move for now
@@ -23,7 +24,7 @@ class ItemEntity(
     }
 
   override fun process(world: World): Action {
-    return Idle(100)
+    return Idle()
   }
 
 }

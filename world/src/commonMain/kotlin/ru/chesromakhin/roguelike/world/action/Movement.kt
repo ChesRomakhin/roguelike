@@ -6,9 +6,8 @@ import ru.chesromakhin.roguelike.world.World
 import ru.chesromakhin.roguelike.world.entity.component.Passable
 
 class Movement(
-  private val direction: Direction,
-  exhaustion: Int
-): Action(exhaustion) {
+  private val direction: Direction
+): Action {
 
   override fun execute(entity: Entity, world: World) {
     val location = entity.location
@@ -21,7 +20,7 @@ class Movement(
       }
     }
 
-    entity.exhaust = exhaustion
+    entity.exhaust = entity.actionExhaustion
   }
 
 

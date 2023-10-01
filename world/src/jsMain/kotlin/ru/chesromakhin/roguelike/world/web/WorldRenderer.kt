@@ -50,7 +50,7 @@ class WorldRenderer(private val world: World, private val element: Element) {
 
         cellNode.textContent = when (cell.type) {
           CellType.FLOOR -> "."
-          CellType.WALL -> "#"
+          CellType.WALL -> "🧱"
           else -> "?"
         }
       }

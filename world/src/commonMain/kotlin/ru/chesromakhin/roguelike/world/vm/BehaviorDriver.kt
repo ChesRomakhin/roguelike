@@ -1,26 +1,31 @@
 package ru.chesromakhin.roguelike.world.vm
 
-import ru.chesromakhin.roguelike.world.CommandListener
 import ru.chesromakhin.roguelike.world.action.Action
 import ru.chesromakhin.roguelike.world.entity.Entity
 import ru.chesromakhin.vm.driver.Driver
 
-class BehaviorDriver: Driver {
+typealias BehaviorListener =  (action: Action) -> Unit
 
-  override val name: String = "world.behaviour"
+class BehaviorDriver(val entity: Entity) : Driver {
 
-  private var commandListeners: List<CommandListener> = ArrayList()
+  companion object {
+    const val NAME: String = "world.behavior"
+  }
+
+  override val name: String = NAME
+
+  private var commandListeners: List<BehaviorListener> = ArrayList()
 
   var lastAction: Action? = null
     get() = field
 
-  fun onCommand(listener: CommandListener) {
+  fun onCommand(listener: BehaviorListener) {
     commandListeners += listener
   }
 
-  fun sendCommand(action: Action, entity: Entity) {
+  fun sendCommand(action: Action) {
     this.lastAction = action
-    commandListeners.forEach { it.invoke(action, entity) }
+    commandListeners.forEach { it.invoke(action) }
   }
 
 }

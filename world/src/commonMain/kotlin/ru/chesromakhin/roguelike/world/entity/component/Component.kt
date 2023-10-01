@@ -8,7 +8,9 @@ interface Component {
 
   val name: String
 
-  fun process(entity: Entity, world: World): Action? {
+  var entity: Entity?
+
+  fun process(world: World): Action? {
     return null
   }
 

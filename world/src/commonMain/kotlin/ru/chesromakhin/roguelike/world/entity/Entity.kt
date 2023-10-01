@@ -8,9 +8,10 @@ import kotlin.reflect.KClass
 
 abstract class Entity(val id: String) {
 
-  open var char: Char = '?'
+  open var char: String = "?"
   var location: Location = Location(0, 0)
 
+  open var actionExhaustion: Int = 1
   open var exhaust: Int = 0
 
   protected var components: List<Component> = ArrayList()
@@ -18,6 +19,7 @@ abstract class Entity(val id: String) {
   abstract fun process(world: World): Action
 
   fun addComponent(component: Component) {
+    component.entity = this
     this.components += component
   }
 

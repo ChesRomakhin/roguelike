@@ -14,8 +14,8 @@ class WanderingBot(id: String, health: Int) : Entity(id) {
     this.addComponent(Inventory())
   }
 
-  override var char: Char = 'W'
-  var speed: Int = 2
+  override var char: String = "🧟"
+  override var actionExhaustion: Int = 2
 
   private var random: Random = Random(id.hashCode())
 
@@ -28,10 +28,10 @@ class WanderingBot(id: String, health: Int) : Entity(id) {
     val attackDirection = Direction.values().find { world.getEntity(location + it.delta, HealthComponent::class) != null }
 
     if (attackDirection != null && random.nextBoolean()) {
-      return Attack(attackDirection, this.getMoveExhaustion())
+      return Attack(attackDirection)
     }
 
-    return Movement(this.getRandomDirection(), this.getMoveExhaustion())
+    return Movement(this.getRandomDirection())
   }
 
   fun setSeed(seed: Int) {
@@ -41,10 +41,6 @@ class WanderingBot(id: String, health: Int) : Entity(id) {
   private fun getRandomDirection(): Direction {
     val directions = Direction.values()
     return directions[random.nextInt(directions.size)]
-  }
-
-  private fun getMoveExhaustion(): Int {
-    return speed
   }
 
 }

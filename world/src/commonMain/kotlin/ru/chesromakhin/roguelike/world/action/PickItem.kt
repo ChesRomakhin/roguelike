@@ -8,10 +8,10 @@ import ru.chesromakhin.roguelike.world.item.ItemComponent
 import ru.chesromakhin.roguelike.world.item.ItemEntity
 import ru.chesromakhin.roguelike.world.item.Weapon
 
-class PickItem: Action(1) {
+class PickItem: Action {
 
   override fun execute(entity: Entity, world: World) {
-    entity.exhaust += this.exhaustion
+    entity.exhaust += 1
 
     val itemEntity = (world.getEntity(entity.location, ItemComponent::class) ?: return) as ItemEntity
     val item = itemEntity.getComponent(ItemComponent::class)!!.item

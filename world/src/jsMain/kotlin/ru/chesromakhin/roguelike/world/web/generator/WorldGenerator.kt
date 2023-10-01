@@ -21,12 +21,13 @@ fun generateWorld(): World {
 
   val wanderingBot = WanderingBot(Date.now().toString(), 10)
   wanderingBot.location = Location(1,2)
+  wanderingBot.actionExhaustion = 2
   world.addEntity(wanderingBot)
 
   val wanderingBot2 = WanderingBot(Date.now().toString(), 10)
   wanderingBot2.location = Location(6,5)
-  wanderingBot2.speed = 4
-  wanderingBot2.char = 'F'
+  wanderingBot2.actionExhaustion = 4
+  wanderingBot2.char = "🤖"
   world.addEntity(wanderingBot2)
 
   generateItems(world, 7)
@@ -36,13 +37,18 @@ fun generateWorld(): World {
 
 fun generateItems(world: World, itemCount: Int) {
   IntRange(0, itemCount).map {
+    var symbol = ""
     val item = if (it % 2 == 0) {
+      symbol = "🛡️"
       Armor(it.toString(), it + 1)
     } else {
+      symbol = "🗡️"
       Weapon(it.toString(), it + 1)
     }
     val itemEntity = ItemEntity(item)
     itemEntity.location = Location(it + 1, it + 1)
+    itemEntity.char = symbol
+
     itemEntity
   }.forEach { world.addEntity(it) }
 }
